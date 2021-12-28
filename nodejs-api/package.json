@@ -1,0 +1,26 @@
+{
+  "name": "nodejs-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@opentelemetry/api": "^1.0.2",
+    "@opentelemetry/auto-instrumentations-node": "^0.25.0",
+    "@opentelemetry/exporter-otlp-http": "^0.26.0",
+    "@opentelemetry/instrumentation": "^0.25.0",
+    "@opentelemetry/instrumentation-aws-lambda": "^0.25.0",
+    "@opentelemetry/instrumentation-http": "^0.25.0",
+    "@opentelemetry/sdk-trace-base": "^0.25.0",
+    "@opentelemetry/sdk-trace-node": "^0.25.0",
+    "aws-sdk": "^2.1048.0",
+    "axios": "^0.24.0",
+    "logger": "github:baselime/logger",
+    "uuid": "^8.3.2"
+  }
+}
