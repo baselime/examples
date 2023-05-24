@@ -1,0 +1,17 @@
+{
+  "devDependencies": {
+    "@types/node": "^18.16.1",
+    "ts-toolbelt": "^9.6.0",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-cloudwatch": "^1.202.0",
+    "@aws-cdk/aws-cloudwatch-actions": "^1.202.0",
+    "@aws-cdk/aws-lambda-event-sources": "^1.202.0",
+    "@aws-cdk/aws-sns": "^1.202.0",
+    "@aws-cdk/aws-ssm": "^1.202.0",
+    "@aws-cdk/aws-stepfunctions": "^1.202.0",
+    "@aws-cdk/aws-stepfunctions-tasks": "^1.202.0",
+    "constructs": "^3.4.305"
+  }
+}
