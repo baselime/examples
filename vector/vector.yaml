@@ -1,0 +1,21 @@
+# Set global options
+data_dir: "/var/lib/vector"
+
+sources:
+  fluent:
+    type: "docker_logs"
+    exclude_containers:
+      - "vector-x"
+
+# Send structured data to Baselime
+sinks:
+  baselime:
+    inputs:
+      - "fluent"
+    type: "http"
+    uri: "https://events.baselime.io/v1/vector-logs"
+    encoding:
+      codec: "json"
+    request:
+      headers:
+        x-api-key: "YOUR_API_KEY"

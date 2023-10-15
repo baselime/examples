@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: fluentd
+  labels:
+    k8s-app: fluentd-logging
+    version: v1
+spec:
+  selector:
+    matchLabels:
+      k8s-app: fluentd-logging
+      version: v1
+  template:
+    metadata:
+      labels:
+        k8s-app: fluentd-logging
+        version: v1
+    spec:
+      containers:
+        - name: logger
+          image: fluent/fluentd-kubernetes-daemonset:v1.11.5-debian-elasticsearch7-1.1
+          env:
+            - name: FLUENTD_ARGS
+              value: -c /fluentd/etc/fluent.conf
+            - name: FOO
+              value: BAR17
+          volumeMounts:
+            - mountPath: /fluentd/etc
+              name: config-volume
+            - name: varlog
+              mountPath: /var/log
+            - name: dockercontainerlogdirectory
+              mountPath: /var/lib/docker/containers
+              readOnly: true
+      volumes:
+        - name: varlog
+          hostPath:
+            path: /var/log
+        - name: config-volume
+          configMap:
+            name: fluentd-config
+            items:
+              - key: fluent.conf
+                path: fluent.conf
+        - name: dockercontainerlogdirectory
+          hostPath:
+            path: /var/lib/docker/containers
