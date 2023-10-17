@@ -4,7 +4,6 @@ import { PrismaInstrumentation } from '@prisma/instrumentation';
 
 export async function register() {
     if (process.env.NEXT_RUNTIME === 'nodejs') {
-      console.log("Hello from baselime")
       const { BaselimeSDK } = await import('@baselime/node-opentelemetry');
   
       const sdk = new BaselimeSDK({
