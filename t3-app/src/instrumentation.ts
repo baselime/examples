@@ -9,7 +9,6 @@ export async function register() {
   
       const sdk = new BaselimeSDK({
         serverless: true,
-        collectorUrl: "https://otel.baselime.cc/v1",
         instrumentations: [
           new HttpInstrumentation(),
           new PrismaInstrumentation()
