@@ -10,9 +10,7 @@ import { initTRPC } from "@trpc/server";
 import { type NextRequest } from "next/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
-import { Span, trace } from '@opentelemetry/api';
 import { db } from "~/server/db";
-
 /**
  * 1. CONTEXT
  *
@@ -92,24 +90,7 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
  */
 export const createTRPCRouter = t.router;
 
-/**
- * Public (unauthenticated) procedure
- *
- * This is the base piece you use to build new queries and mutations on your tRPC API. It does not
- * guarantee that a user querying is authorized, but you can still access user session data if they
- * are logged in.
- */
-const tracer = trace.getTracer('@baselime/trpc');
 
-const tracerMiddleware = t.middleware(async (opts) => {
-  return tracer.startActiveSpan('trpc', async (span: Span) => {
-    const result = await opts.next();
-
-    const meta = { path: opts.path, type: opts.type, ok: result.ok };
-    span.setAttributes(meta)
-    span.end();
-    return result;
-  });
-});
-
-export const publicProcedure = t.procedure.use(tracerMiddleware);
+export const publicProcedure = t.procedure.use(tracing({
+  collectInput: true,
+}));
