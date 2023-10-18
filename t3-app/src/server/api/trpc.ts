@@ -92,4 +92,4 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
 export const createTRPCRouter = t.router;
 
 
-export const publicProcedure = t.procedure.use(trpcTracingMiddleware({ collectInput: true }));
+export const publicProcedure = t.procedure.use(trpcTracingMiddleware({ collectInput: true }))
