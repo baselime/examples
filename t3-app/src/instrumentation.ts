@@ -24,7 +24,7 @@ export async function register() {
                 timezone: request.headers['x-vercel-ip-timezone'],
               }
               return flatten({
-                requestId,
+                faas: { execution: requestId },
                 user
               })
             }
