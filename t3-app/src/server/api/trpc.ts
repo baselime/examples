@@ -11,6 +11,7 @@ import { type NextRequest } from "next/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 import { db } from "~/server/db";
+import { trpcTracingMiddleware } from "@baselime/node-opentelemetry";
 /**
  * 1. CONTEXT
  *
@@ -91,4 +92,4 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
 export const createTRPCRouter = t.router;
 
 
-export const publicProcedure = t.procedure;
+export const publicProcedure = t.procedure.use(trpcTracingMiddleware({ collectInput: true }));
