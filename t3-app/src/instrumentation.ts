@@ -14,7 +14,7 @@ export async function register() {
           startIncomingSpanHook: (request) => {
             const vercelRequestId = request.headers['x-vercel-id'];
 
-            if (vercelRequestId) {
+            if (typeof vercelRequestId === "string") {
               const requestIdParts = vercelRequestId.split("::");
               const requestId = requestIdParts[requestIdParts.length - 1];
               const user = {
