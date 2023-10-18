@@ -3,17 +3,20 @@ import { HttpInstrumentation } from '@opentelemetry/instrumentation-http';
 import { PrismaInstrumentation } from '@prisma/instrumentation';
 import { flatten } from 'flat';
 export async function register() {
-    if (process.env.NEXT_RUNTIME === 'nodejs') {
-      const { BaselimeSDK } = await import('@baselime/node-opentelemetry');
-  
-      const sdk = new BaselimeSDK({
-        serverless: true,
-        service: "t3-app",
-        instrumentations: [
-          new HttpInstrumentation({
-            startIncomingSpanHook: (request) => {
-              const requestId = request.headers['x-vercel-id'];
+  if (process.env.NEXT_RUNTIME === 'nodejs') {
+    const { BaselimeSDK } = await import('@baselime/node-opentelemetry');
 
+    const sdk = new BaselimeSDK({
+      serverless: true,
+      service: "t3-app",
+      instrumentations: [
+        new HttpInstrumentation({
+          startIncomingSpanHook: (request) => {
+            const vercelRequestId = request.headers['x-vercel-id'];
+
+            if (vercelRequestId) {
+              const requestIdParts = vercelRequestId.split("::");
+              const requestId = requestIdParts[requestIdParts.length - 1];
               const user = {
                 ip: request.headers['x-forwarded-for'],
                 country: request.headers['x-vercel-ip-country'],
@@ -24,15 +27,24 @@ export async function register() {
                 timezone: request.headers['x-vercel-ip-timezone'],
               }
               return flatten({
+                requestId: requestId,
                 faas: { execution: requestId },
                 user
               })
             }
-          }),
-          new PrismaInstrumentation()
-        ]
-      });
-      sdk.start();
-    }
-   
+
+            return {}
+
+
+
+
+
+          }
+        }),
+        new PrismaInstrumentation()
+      ]
+    });
+    sdk.start();
   }
+
+}
