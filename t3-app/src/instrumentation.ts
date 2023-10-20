@@ -9,7 +9,6 @@ export async function register() {
     const sdk = new BaselimeSDK({
       serverless: true,
       service: "t3-app",
-      collectorUrl: "https://otel.baselime.cc/v1",
       instrumentations: [
         new BetterHttpInstrumentation({ 
           plugins: [
