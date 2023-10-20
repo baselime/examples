@@ -1,18 +1,21 @@
 // instrumentation.ts
 
-import { HttpInstrumentation } from '@opentelemetry/instrumentation-http';
 import { PrismaInstrumentation } from '@prisma/instrumentation';
 
 export async function register() {
   if (process.env.NEXT_RUNTIME === 'nodejs') {
-    const { BaselimeSDK, VercelPlugin, betterHttpInstrumentation, StripePlugin } = await import('@baselime/node-opentelemetry');
+    const { BaselimeSDK, VercelPlugin, BetterHttpInstrumentation, StripePlugin } = await import('@baselime/node-opentelemetry');
 
     const sdk = new BaselimeSDK({
       serverless: true,
       service: "t3-app",
+      collectorUrl: "https://otel.baselime.cc/v1",
       instrumentations: [
-        new HttpInstrumentation({
-          ...betterHttpInstrumentation({ plugins: [VercelPlugin, StripePlugin] })
+        new BetterHttpInstrumentation({ 
+          plugins: [
+            new StripePlugin(),
+            new VercelPlugin()
+          ]
         }),
         new PrismaInstrumentation()
       ]

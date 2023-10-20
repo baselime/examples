@@ -1,0 +1,17 @@
+{
+  "name": "planetscale",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@baselime/node-opentelemetry": "^0.2.8",
+    "@opentelemetry/api": "^1.6.0",
+    "@opentelemetry/instrumentation-mysql2": "^0.34.2",
+    "mysql2": "^3.6.2"
+  }
+}
