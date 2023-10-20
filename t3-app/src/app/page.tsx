@@ -33,7 +33,7 @@ export default async function Home() {
           </p>
         </div>
 
-        <CrudShowcase />
+        {/* <CrudShowcase /> */}
       </div>
     </main>
   );
