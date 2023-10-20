@@ -2,7 +2,7 @@ import { NextRequest } from "next/server";
 
 
 const handler = (req: NextRequest) => {
-    console.error({ message: "User Not Found", req })
+    console.error(JSON.stringify({ message: "User Not Found", req }))
     throw Error("User Not Found");
 }
 
