@@ -38,6 +38,7 @@ export type AppContext = {
 
 export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+		
 		const logger = new BaselimeLogger({
 			ctx,
 			baselimeApiKey: env.BASELIME_API_KEY,

@@ -8,7 +8,6 @@ export async function register() {
 
     const sdk = new BaselimeSDK({
       serverless: true,
-      service: "t3-app",
       instrumentations: [
         new BetterHttpInstrumentation({ 
           plugins: [
