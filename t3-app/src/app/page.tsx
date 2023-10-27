@@ -4,15 +4,24 @@ import { UserButton } from "@clerk/nextjs";
 import { CreatePost } from "~/app/_components/create-post";
 import { api } from "~/trpc/server";
 import { trace } from "@opentelemetry/api";
+import { createLogger, format} from 'winston';
+
+const logger = createLogger({
+  level: "info",
+  format: format.json(),
+});
+
 export default async function Home() {
   
   const hello = await api.post.hello.query({ text: "from tRPC" });
   const span = trace.getActiveSpan();
   console.log(JSON.stringify({
-    message: "hello",
+    "foo": "bar",
     spanId: span?.spanContext().spanId,
     traceId: span?.spanContext().traceId
   }))
+
+  logger.info("Hello from winston")
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
       <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">

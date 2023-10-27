@@ -17,6 +17,7 @@
     "@opentelemetry/api": "^1.6.0",
     "@opentelemetry/instrumentation-fetch": "^0.44.0",
     "@opentelemetry/instrumentation-http": "^0.44.0",
+    "@opentelemetry/instrumentation-winston": "^0.32.2",
     "@planetscale/database": "^1.11.0",
     "@prisma/adapter-planetscale": "^5.4.3",
     "@prisma/client": "^5.1.1",
@@ -36,6 +37,7 @@
     "react-dom": "18.2.0",
     "superjson": "^1.13.1",
     "undici": "^5.26.3",
+    "winston": "^3.11.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
