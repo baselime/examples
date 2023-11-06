@@ -17,7 +17,7 @@ export const postRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       // simulate a slow db call
 
-      if(input.name === "error") {
+      if (input.name === "error") {
         throw Error('sad')
       }
 
@@ -29,6 +29,7 @@ export const postRouter = createTRPCRouter({
     }),
 
   getLatest: publicProcedure.query(({ ctx }) => {
+    console.log(JSON.stringify({ message: "Fetching Latest Post" }))
     return ctx.db.post.findFirst({
       orderBy: { createdAt: "desc" },
     });
