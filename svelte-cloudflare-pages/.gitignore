@@ -5,6 +5,7 @@ node_modules
 /package
 .env
 .env.*
+.wrangler
 !.env.example
 .vercel
 .output

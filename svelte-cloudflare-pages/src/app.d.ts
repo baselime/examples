@@ -11,6 +11,7 @@ declare global {
 			}
 			context: {
 				waitUntil(promise: Promise<any>): void;
+				passThroughOnException(): void;
 			}
 		}
 	}
