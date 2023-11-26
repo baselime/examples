@@ -19,7 +19,7 @@ This is a simple API to manage blog posts with 2 end-points:
 
 To illustrate how Baselime works, this app makes a few external calls:
 
-- to `DyanmoDB` to save and retrieve blog posts.
+- to `DynamoDB` to save and retrieve blog posts.
 - to `https://jsonplaceholder.typicode.com` to add illustration images to blog posts.
 
 ## Demo
