@@ -32,6 +32,10 @@ def handler(event, context):
         Body=json.dumps(event),
     )
 
+    s3.get_object(
+        Bucket=BUCKET,
+        Key='your_key',
+    )
     queue.send_message(
         QueueUrl=QUEUE,
         MessageBody=json.dumps(event),

@@ -8,7 +8,19 @@ await import("./src/env.mjs");
 const config = {
     experimental: {
         instrumentationHook: true,
-    }
+    },
+    webpack: (
+        config,
+        { isServer }
+    ) => {
+        if (isServer) {
+            config.ignoreWarnings = [
+                { module: /opentelemetry/, },
+            ]
+        }
+        return config
+    },
+
 };
 
 export default config;
