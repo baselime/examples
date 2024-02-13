@@ -5,4 +5,7 @@ new BaselimeSDK({
     instrumentations: [new BetterHttpInstrumentation()],
 }).start();
 
-export const handle = withOpenTelemetry(({ event, resolve }) =>  resolve(event));
+export const handle = withOpenTelemetry(({ event, resolve }) =>  {
+    console.log(event.request.headers.entries())
+   return resolve(event)
+});
