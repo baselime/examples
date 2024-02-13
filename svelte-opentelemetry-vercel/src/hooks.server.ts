@@ -6,6 +6,6 @@ new BaselimeSDK({
 }).start();
 
 export const handle = withOpenTelemetry(({ event, resolve }) =>  {
-    console.log(event.request.headers.entries())
+    event.request.headers.forEach(header => console.log(header))
    return resolve(event)
 });
