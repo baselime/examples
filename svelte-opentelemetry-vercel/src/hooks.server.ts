@@ -1,26 +1,8 @@
-import { BaselimeSDK, BetterHttpInstrumentation } from "@baselime/node-opentelemetry";
-import { trace } from "@opentelemetry/api";
+import { withOpenTelemetry } from '@baselime/sveltekit-opentelemetry-middleware'
+import { BaselimeSDK, BetterHttpInstrumentation } from '@baselime/node-opentelemetry';
 
-function setupTracing() {
-    const sdk = new BaselimeSDK({
-        serverless: true, 
-        collectorUrl: "https://otel.baselime.cc/v1",
-        instrumentations: [
-            new BetterHttpInstrumentation()
-        ]
-    });
-    sdk.start();
-}
-setupTracing();
+new BaselimeSDK({
+    instrumentations: [new BetterHttpInstrumentation()],
+}).start();
 
-import type { Handle } from '@sveltejs/kit';
-const tracer = trace.getTracer("svelte-kit");
-export const handle: Handle = async ({ event, resolve }) => {
-    console.log("Server Hook: handle");
-    return tracer.startActiveSpan("svelte-kit", async (span) => { 
-
-        const data =await  resolve(event);
-        span.end();
-        return data
-    });
-};
+export const handle = withOpenTelemetry(({ event, resolve }) =>  resolve(event));
