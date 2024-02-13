@@ -18,7 +18,7 @@
 	"type": "module",
 	"dependencies": {
 		"@baselime/node-opentelemetry": "^0.3.6",
-		"@baselime/sveltekit-opentelemetry-middleware": "^0.1.3",
+		"@baselime/sveltekit-opentelemetry-middleware": "^0.1.5",
 		"@opentelemetry/api": "^1.7.0"
 	}
 }
